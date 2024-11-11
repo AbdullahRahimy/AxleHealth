@@ -20,10 +20,16 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18.12.0'  # Ensure Node.js version 18.12.0 is installed
+          node-version: '18.12.0'
+
+      - name: Verify Node.js Version
+        run: node -v 
 
       - name: Install Dependencies
-        run: pnpm install
+        run: |
+          corepack enable  # Ensure pnpm is available
+          corepack prepare pnpm@latest --activate  # Install and activate the latest pnpm
+          pnpm install  # Install dependencies using pnpm
         working-directory: ./axleWebsite
 
       - name: Cypress run
