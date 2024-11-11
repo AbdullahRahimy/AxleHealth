@@ -1,0 +1,39 @@
+name: E2E on Chrome
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to test'
+        required: false
+        default: 'master'
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
+    branches:
+      - master
+
+jobs:
+  Cypress-Run:
+    runs-on: ubuntu-latest
+    name: E2E on Chrome
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3  # Use the latest version
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3  # Setup Node.js environment
+        with:
+          node-version: '16'  # Specify your Node.js version
+
+      - name: Install pnpm
+        run: npm install -g pnpm  # Ensure pnpm is installed
+
+      - name: Install Dependencies
+        run: pnpm install
+        working-directory: ./axleWebsite
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+         browser: chrome
+         working-directory: ./axleWebsite  # Correct indentation and syntax
