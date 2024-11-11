@@ -20,10 +20,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18.12.0'
+          node-version: '18.12.0'  # Ensuring Node.js version 18.12.0 is installed
 
       - name: Verify Node.js Version
-        run: node -v 
+        run: node -v  # This will help us check the Node.js version in the logs
 
       - name: Install Dependencies
         run: |
@@ -33,7 +33,5 @@ jobs:
         working-directory: ./axleWebsite
 
       - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          browser: chrome
-          working-directory: ./axleWebsite
+        run: cypress run --config-file=cypress.config.js --browser chrome
+        working-directory: ./axleWebsite
