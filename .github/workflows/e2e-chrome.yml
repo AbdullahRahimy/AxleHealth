@@ -25,6 +25,9 @@ jobs:
       - name: Verify Node.js Version
         run: node -v  # This will help us check the Node.js version in the logs
 
+      - name: Clear npm Cache
+        run: npm cache clean --force
+
       - name: Install Dependencies
         run: |
           corepack enable  # Ensure pnpm is available
@@ -33,5 +36,5 @@ jobs:
         working-directory: ./axleWebsite
 
       - name: Cypress run
-        run: cypress run --config-file=cypress.config.js
+        run: cypress run --config-file=cypress.config.js --browser chrome
         working-directory: ./axleWebsite
