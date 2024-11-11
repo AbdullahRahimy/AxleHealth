@@ -20,21 +20,25 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18.12.0'  # Ensuring Node.js version 18.12.0 is installed
+          node-version: '18.12.0'
 
       - name: Verify Node.js Version
-        run: node -v  # This will help us check the Node.js version in the logs
+        run: node -v
 
       - name: Clear npm Cache
         run: npm cache clean --force
 
       - name: Install Dependencies
         run: |
-          corepack enable  # Ensure pnpm is available
-          corepack prepare pnpm@latest --activate  # Install and activate the latest pnpm
-          pnpm install  # Install dependencies using pnpm
+          corepack enable
+          corepack prepare pnpm@latest --activate
+          pnpm install
+        working-directory: ./axleWebsite
+
+      - name: Install Cypress
+        run: npx cypress install
         working-directory: ./axleWebsite
 
       - name: Cypress run
-        run: cypress run --config-file=cypress.config.js --browser chrome
+        run: npx cypress run --config-file=cypress.config.js --browser chrome
         working-directory: ./axleWebsite
