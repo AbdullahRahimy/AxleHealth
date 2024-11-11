@@ -6,11 +6,8 @@ on:
       branch:
         description: 'Branch to test'
         required: false
-        default: 'master'
   pull_request:
     types: [opened, reopened, edited, synchronize]
-    branches:
-      - master
 
 jobs:
   Cypress-Run:
@@ -27,5 +24,5 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-         browser: chrome
-         working-directory: ./axleWebsite  # Correct indentation and syntax
+          browser: chrome
+          working-directory: ./axleWebsite
