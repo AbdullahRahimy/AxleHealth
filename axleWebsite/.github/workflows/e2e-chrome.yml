@@ -35,5 +35,3 @@ jobs:
       - name: Cypress run
         run: cypress run --config-file=cypress.config.js
         working-directory: ./axleWebsite
-        with:
-          browser: chrome
