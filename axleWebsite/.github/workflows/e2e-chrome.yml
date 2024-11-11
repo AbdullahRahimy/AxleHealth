@@ -17,6 +17,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.11.0'
+
       - name: Install Dependencies
         run: pnpm install
         working-directory: ./axleWebsite
